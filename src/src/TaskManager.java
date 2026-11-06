@@ -11,4 +11,10 @@ public class TaskManager {
     public void addTask(String task){
         tasks.add(task);
     }
+
+    public void showTasks(){
+        for(String task : tasks){
+            System.out.println(task);
+        }
+    }
 }
