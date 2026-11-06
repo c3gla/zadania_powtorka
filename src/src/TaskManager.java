@@ -5,8 +5,10 @@ public class TaskManager {
     ArrayList<String> tasks;
 
     TaskManager(){
-        tasks = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
-
+    public void addTask(String task){
+        tasks.add(task);
+    }
 }
