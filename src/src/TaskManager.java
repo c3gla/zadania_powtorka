@@ -17,4 +17,12 @@ public class TaskManager {
             System.out.println(task);
         }
     }
+
+    public void deleteTask(int index){
+        tasks.remove(index);
+    }
+
+    public void deleteTask(String task){
+        tasks.remove(task);
+    }
 }
