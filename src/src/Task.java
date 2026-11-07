@@ -4,13 +4,24 @@ public class Task {
     private String describe;
     private Boolean statusIsDone = false;
     private static int numberOfTasks = 1;
+    private Priority priority = Priority.LOW;
 
 
     Task(String describe){
         this.describe = describe;
         id = numberOfTasks;
         statusIsDone = false;
+        priority = Priority.LOW;
         numberOfTasks++;
+    }
+
+    Task(String describe, Priority priority){
+        this.describe = describe;
+        id = numberOfTasks;
+        statusIsDone = false;
+        this.priority = priority;
+        numberOfTasks++;
+
     }
 
     public int getId(){
@@ -25,9 +36,14 @@ public class Task {
         return statusIsDone;
     }
 
+    public Priority getPriority(){
+        return priority;
+    }
+
     @Override
     public String toString(){
-        return "Task #" + id + ": " + describe + ". Already done: " + statusIsDone;
+        return "Task #" + id + ": " + describe +
+                ". Already done: " + statusIsDone + ". Priority: " + priority;
     }
 }
 
