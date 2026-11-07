@@ -14,19 +14,25 @@ public class Main2 {
 
             System.out.print("Twój wybór: ");
 
-            int choose = scanner.nextInt();
-            scanner.nextLine();
+            int choose;
+            try{
+                choose = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Podaj liczbę!");
+                continue;
+            }
 
             switch (choose){
                 case 1:{
                     System.out.print("Podaj nowe zadanie: ");
-                    manager.addTask(scanner.nextLine());
+                    manager.addTask(new Task(scanner.nextLine()));
                     System.out.println("Zadanie dodano!");
                     break;
                 }
                 case 2: manager.showTasks(); break;
                 case 3: {
-                    System.out.println("Podaj numer indeksu lub treść zadania do usunięcia");
+                    manager.showTasks();
+                    System.out.print("Podaj numer indeksu lub treść zadania do usunięcia: ");
 
                     if (scanner.hasNextInt()) {
                         manager.deleteTask(scanner.nextInt());
@@ -34,6 +40,7 @@ public class Main2 {
                     } else {
                         manager.deleteTask(scanner.nextLine());
                     }
+                    break;
                 }
                 case 4: scanner.close(); System.exit(0); break;
 

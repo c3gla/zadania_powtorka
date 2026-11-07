@@ -2,27 +2,35 @@ import java.util.ArrayList;
 
 public class TaskManager {
 
-    ArrayList<String> tasks;
+    ArrayList<Task> tasks;
 
     TaskManager(){
         this.tasks = new ArrayList<>();
     }
 
-    public void addTask(String task){
+    public void addTask(Task task){
         tasks.add(task);
     }
 
     public void showTasks(){
-        for(String task : tasks){
+        for(Task task : tasks){
             System.out.println(task);
         }
     }
 
     public void deleteTask(int index){
-        tasks.remove(index);
+        tasks.remove(index - 1);
     }
 
-    public void deleteTask(String task){
-        tasks.remove(task);
+    public void deleteTask(String describe){
+
+        for (Task t : tasks){
+            if(t.getDescribe().equals(describe)){
+                tasks.remove(t);
+                break;
+            }
+
+
+        }
     }
 }
