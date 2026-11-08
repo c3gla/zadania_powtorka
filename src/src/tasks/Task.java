@@ -1,3 +1,5 @@
+package tasks;
+
 public class Task {
 
     private int id;
@@ -42,8 +44,8 @@ public class Task {
 
     @Override
     public String toString(){
-        return "Task #" + id + ": " + describe +
-                ". Already done: " + statusIsDone + ". Priority: " + priority;
+        return "tasks.Task #" + id + ": " + describe +
+                ". Already done: " + statusIsDone + ". tasks.Priority: " + priority;
     }
 }
 
