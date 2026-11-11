@@ -10,6 +10,10 @@ public class Task {
 
 
     Task(String describe){
+        if(describe.isEmpty()){
+            throw new IllegalArgumentException("Zadanie nie może nie mieć treści.");
+        }
+
         this.describe = describe;
         id = numberOfTasks;
         statusIsDone = false;

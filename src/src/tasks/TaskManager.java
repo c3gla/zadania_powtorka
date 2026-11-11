@@ -6,33 +6,39 @@ public class TaskManager {
 
     ArrayList<Task> tasks;
 
-    TaskManager(){
+    TaskManager() {
         this.tasks = new ArrayList<>();
     }
 
-    public void addTask(Task task){
+    public void addTask(Task task) {
         tasks.add(task);
     }
 
-    public void showTasks(){
-        for(Task task : tasks){
+    public void showTasks() {
+        for (Task task : tasks) {
             System.out.println(task);
         }
     }
 
-    public void deleteTask(int index){
-        tasks.remove(index - 1);
+    public void deleteTask(int index) {
+
+        int actualIndex = index - 1;
+
+        if (actualIndex < 0 || actualIndex >= tasks.size()) {
+            throw new TaskNotFoundException("Zadanie o numerze " + index + " nie istnieje.");
+        }
+
+
+        tasks.remove(actualIndex);
     }
 
-    public void deleteTask(String describe){
+    public void deleteTask(String describe) {
 
-        for (Task t : tasks){
-            if(t.getDescribe().equals(describe)){
-                tasks.remove(t);
-                break;
-            }
+        boolean removed = tasks.removeIf(t -> t.getDescribe().equals(describe));
 
-
+        if (!removed) {
+            throw new TaskNotFoundException("Nie znaleziono zadania o opisie: " + describe);
         }
+
     }
 }
