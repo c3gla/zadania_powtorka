@@ -1,15 +1,13 @@
 package shapes;
 
 
-public class Circle extends Shape{
+public class Circle extends Shape {
 
     private double radius;
 
-    Circle(double radius){
+    Circle(double radius) {
         setRadius(radius);
     }
-
-
 
 
     @Override
@@ -21,8 +19,8 @@ public class Circle extends Shape{
         return Math.PI * this.radius * this.radius;
     }
 
-    public void setRadius(double radius){
-        if(radius <= 0){
+    public void setRadius(double radius) {
+        if (radius <= 0) {
             throw new IllegalArgumentException("Radius have to be greater than 0.");
         } else {
             this.radius = radius;
