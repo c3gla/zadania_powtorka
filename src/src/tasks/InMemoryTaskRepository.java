@@ -6,16 +6,17 @@ import java.util.function.Predicate;
 
 public class InMemoryTaskRepository implements TaskRepository {
 
-    private List<Task> tasks;
-
-    InMemoryTaskRepository() {
-        tasks = new ArrayList<>();
-    }
+    private List<Task> tasks = new ArrayList<>();
 
 
     @Override
     public void add(Task task) {
         tasks.add(task);
+    }
+
+    @Override
+    public List<Task> findAll() {
+        return new ArrayList<>(tasks);
     }
 
 
@@ -32,19 +33,8 @@ public class InMemoryTaskRepository implements TaskRepository {
     }
 
     @Override
-    public void delete(int index) {
-        tasks.remove(index - 1);
+    public boolean deleteById(int id) {
+        return tasks.removeIf(task -> task.getId() == id);
     }
 
-    @Override
-    public void delete(String describe) {
-
-        for(Task task : tasks){
-            if(task.getDescribe().equals(describe)){
-                tasks.remove(task);
-                break;
-            }
-        }
-
-    }
 }

@@ -2,31 +2,27 @@ package tasks;
 
 public class Task {
 
-    private int id;
-    private String describe;
-    private Boolean statusIsDone = false;
-    private static int numberOfTasks = 1;
-    private Priority priority = Priority.LOW;
+    private final int id;
+    private final String description;
+    private boolean statusIsDone = false;
+    private static int nextId = 1;
+    private Priority priority;
 
 
-    Task(String describe){
-        if(describe.isEmpty()){
+    public Task(String description){
+        this(description, Priority.LOW);
+    }
+
+    public Task(String description, Priority priority){
+
+        if(description == null || description.isBlank()){
             throw new IllegalArgumentException("Zadanie nie może nie mieć treści.");
         }
 
-        this.describe = describe;
-        id = numberOfTasks;
-        statusIsDone = false;
-        priority = Priority.LOW;
-        numberOfTasks++;
-    }
-
-    Task(String describe, Priority priority){
-        this.describe = describe;
-        id = numberOfTasks;
-        statusIsDone = false;
+        this.description = description;
+        id = nextId;
         this.priority = priority;
-        numberOfTasks++;
+        nextId++;
 
     }
 
@@ -34,22 +30,26 @@ public class Task {
         return id;
     }
 
-    public String getDescribe(){
-        return describe;
+    public String getDescription(){
+        return description;
     }
 
-    public Boolean getStatusIsDone(){
+    public Boolean IsDone(){
         return statusIsDone;
     }
 
     public Priority getPriority(){
         return priority;
     }
+    
+    public void markAsDone(){
+        statusIsDone = true;
+    }
 
     @Override
     public String toString(){
-        return "tasks.Task #" + id + ": " + describe +
-                ". Already done: " + statusIsDone + ". tasks.Priority: " + priority;
+        return "Zadanie " + id + ": " + description +
+                ". Status: " + statusIsDone + ". Ważność: " + priority;
     }
 }
 

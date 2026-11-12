@@ -1,44 +1,35 @@
 package tasks;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TaskManager {
 
-    ArrayList<Task> tasks;
+    private final TaskRepository repository;
 
-    TaskManager() {
-        this.tasks = new ArrayList<>();
+    TaskManager(TaskRepository repository) {
+        this.repository = repository;
     }
 
     public void addTask(Task task) {
-        tasks.add(task);
+        repository.add(task);
     }
 
     public void showTasks() {
+        List<Task> tasks = repository.findAll();
+        if(tasks.isEmpty()){
+            System.out.println("Brak zadań.");
+        }
+
         for (Task task : tasks) {
             System.out.println(task);
         }
     }
 
-    public void deleteTask(int index) {
-
-        int actualIndex = index - 1;
-
-        if (actualIndex < 0 || actualIndex >= tasks.size()) {
-            throw new TaskNotFoundException("Zadanie o numerze " + index + " nie istnieje.");
+    public void deleteTask(int id) {
+        if(!repository.deleteById(id)) {
+            throw new TaskNotFoundException("Zadanie o id "
+            + id + " nie istnieje.");
         }
-
-
-        tasks.remove(actualIndex);
-    }
-
-    public void deleteTask(String describe) {
-
-        boolean removed = tasks.removeIf(t -> t.getDescribe().equals(describe));
-
-        if (!removed) {
-            throw new TaskNotFoundException("Nie znaleziono zadania o opisie: " + describe);
-        }
-
     }
 }
