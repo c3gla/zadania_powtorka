@@ -1,3 +1,5 @@
+package week1Exercises;
+
 public class Vowels {
 
     public static int numberOfVowels(String str){

@@ -1,3 +1,5 @@
+package week1Exercises;
+
 public class Factorial {
 
     public static int factorialNormal(int number) {

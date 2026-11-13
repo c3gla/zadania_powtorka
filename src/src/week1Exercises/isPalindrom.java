@@ -1,3 +1,5 @@
+package week1Exercises;
+
 import java.util.Scanner;
 
 public class isPalindrom {

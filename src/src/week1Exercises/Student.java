@@ -1,3 +1,5 @@
+package week1Exercises;
+
 import java.util.Arrays;
 
 public class Student {
@@ -40,7 +42,7 @@ public class Student {
 
     @Override
     public String toString(){
-        return "Student: " + this.name + ", index: " + this.index + ", grades: " + Arrays.toString(this.grades);
+        return "week1Exercises.Student: " + this.name + ", index: " + this.index + ", grades: " + Arrays.toString(this.grades);
     }
 
     public float getAvarage(){

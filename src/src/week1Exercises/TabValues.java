@@ -1,3 +1,5 @@
+package week1Exercises;
+
 public class TabValues {
 
     public static int maxValue(int[] numbers){
