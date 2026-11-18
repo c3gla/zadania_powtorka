@@ -13,7 +13,10 @@ public class Main {
             System.out.println("1. Dodaj zadanie");
             System.out.println("2. Pokaż zadania");
             System.out.println("3. Usuń zadanie");
-            System.out.println("4. Wyjdź");
+            System.out.println("4. Oznacz jako wykonane");
+            System.out.println("5. Pokaż według priorytetu");
+            System.out.println("6. Pokaż zadania o wybranym priorytecie");
+            System.out.println("7. Wyjdź");
 
             System.out.print("Twój wybór: ");
 
@@ -37,12 +40,12 @@ public class Main {
                         int priorityChoose;
                         try {
                             priorityChoose = Integer.parseInt(scanner.nextLine());
-                            switch (priorityChoose){
+                            switch (priorityChoose) {
                                 case 2 -> priority = Priority.MEDIUM;
                                 case 3 -> priority = Priority.HIGH;
                                 default -> System.out.println("Brak takiej opcji.");
                             }
-                            manager.addTask(new Task(description,priority));
+                            manager.addTask(new Task(description, priority));
                         } catch (NumberFormatException e) {
                             System.out.println("Podaj liczbę!");
                             continue;
@@ -56,8 +59,7 @@ public class Main {
 
 
                 }
-                case 2 ->
-                    manager.showTasks();
+                case 2 -> manager.showTasks();
 
                 case 3 -> {
                     manager.showTasks();
@@ -75,13 +77,39 @@ public class Main {
 
                 }
                 case 4 -> {
+                    System.out.print("Podaj numer zadania, które oznaczyć jako wykonane: ");
+                    try {
+                        int id = Integer.parseInt(scanner.nextLine());
+                        manager.markAsDone(id);
+                        System.out.println("Zadanie oznaczono jako wykonane!");
+                    } catch (TaskNotFoundException e) {
+                        System.out.println("Error: " + e.getMessage());
+                    } catch (NumberFormatException e) {
+                        System.out.println("Podaj liczbę!");
+                    }
+
+                }
+
+                case 5 -> manager.showTasksSortedByPriority();
+
+                case 6 -> {
+                    System.out.print("Podaj priorytet (LOW/MEDIUM/HIGH): ");
+                    try {
+                        Priority priority = Priority.valueOf(scanner.nextLine());
+                        manager.showTasksByPriority(priority);
+
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("Error: " + e.getMessage());
+                    }
+
+                }
+
+                case 7 -> {
                     scanner.close();
                     running = false;
                 }
 
-                default ->
-                    System.out.println("Brak takiej opcji");
-
+                default -> System.out.println("Brak takiej opcji");
 
 
             }

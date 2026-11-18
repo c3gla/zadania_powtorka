@@ -9,6 +9,7 @@ public interface TaskRepository {
     List<Task> findAll();
     List<Task> findAll(Predicate<Task> condition);
     boolean deleteById(int id);
+    Task findById(int id);
 
 
 

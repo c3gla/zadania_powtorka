@@ -1,22 +1,24 @@
 package tasks;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Predicate;
 
 public class InMemoryTaskRepository implements TaskRepository {
 
-    private List<Task> tasks = new ArrayList<>();
+    private Map<Integer, Task> tasks = new LinkedHashMap<>();
 
 
     @Override
     public void add(Task task) {
-        tasks.add(task);
+        tasks.put(task.getId(), task);
     }
 
     @Override
     public List<Task> findAll() {
-        return new ArrayList<>(tasks);
+        return new ArrayList<>(tasks.values());
     }
 
 
@@ -24,7 +26,7 @@ public class InMemoryTaskRepository implements TaskRepository {
     public List<Task> findAll(Predicate<Task> condition) {
 
         List<Task> result = new ArrayList<>();
-        for (Task task : tasks) {
+        for (Task task : tasks.values()) {
             if (condition.test(task)) {
                 result.add(task);
             }
@@ -34,7 +36,15 @@ public class InMemoryTaskRepository implements TaskRepository {
 
     @Override
     public boolean deleteById(int id) {
-        return tasks.removeIf(task -> task.getId() == id);
+
+        return tasks.remove(id) != null;
+    }
+
+    @Override
+    public Task findById(int id) {
+
+        if(tasks.containsKey(id)) return tasks.get(id);
+        return null;
     }
 
 }

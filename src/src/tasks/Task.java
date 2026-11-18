@@ -1,5 +1,7 @@
 package tasks;
 
+import java.util.Objects;
+
 public class Task {
 
     private final int id;
@@ -41,6 +43,7 @@ public class Task {
     public Priority getPriority(){
         return priority;
     }
+
     
     public void markAsDone(){
         statusIsDone = true;
@@ -50,6 +53,18 @@ public class Task {
     public String toString(){
         return "Zadanie " + id + ": " + description +
                 ". Status: " + statusIsDone + ". Ważność: " + priority;
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if( o == null || getClass() != o.getClass()) return false;
+        Task task = (Task) o;
+        return id == task.getId();
+    }
+
+    @Override
+    public int hashCode(){
+        return Objects.hash(id);
     }
 }
 
